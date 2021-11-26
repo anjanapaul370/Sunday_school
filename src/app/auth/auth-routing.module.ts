@@ -1,14 +1,26 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { NbAuthComponent } from '@nebular/auth';
 import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 
 const routes: Routes = [
   {
-    path: 'login',
-    component: LoginComponent,
+    path: '',
+    component: NbAuthComponent,
+    children: [
+      {
+        path: 'login',
+        component: LoginComponent,
+      },
+      {
+        path: 'register',
+        component: RegisterComponent,
+      },
+      { path: '', redirectTo: 'login', pathMatch: 'full' },
+      { path: '**', redirectTo: 'login' },
+    ],
   },
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
-  { path: '**', redirectTo: 'login' },
 ];
 
 @NgModule({

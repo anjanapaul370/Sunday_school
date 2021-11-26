@@ -7,6 +7,7 @@ import {
   NbDialogModule,
   NbMenuModule,
   NbSidebarModule,
+  NbThemeModule,
   NbToastrModule,
   NbWindowModule,
 } from '@nebular/theme';
@@ -32,6 +33,7 @@ import { AppComponent } from './app.component';
     NbWindowModule.forRoot(),
     NbToastrModule.forRoot(),
     NbAuthModule.forRoot(),
+    NbThemeModule.forRoot()
   ],
   providers: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
