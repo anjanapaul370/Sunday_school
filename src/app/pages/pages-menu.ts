@@ -13,59 +13,18 @@ export const MENU_ITEMS: NbMenuItem[] = [
   },
   {
     title: 'Teachers',
-    icon: 'person',
-    // children: [
-    //   {
-    //     title: 'Teacher List',
-    //     link: '/pages/layout/stepper',
-    //   },
-    //   {
-    //     title: 'Teacher Add',
-    //     link: '/pages/layout/list',
-    //   },
-    //   {
-    //     title: 'Teacher Edit',
-    //     link: '/pages/layout/list',
-    //   },
-    // ],
+    icon: 'person'
   },
   {
     title: 'Students',
-    icon: 'people',
-    // children: [
-    //   {
-    //     title: 'Student List',
-    //     link: '/pages/forms/inputs',
-    //   },
-    //   {
-    //     title: 'Student Add',
-    //     link: '/pages/forms/layouts',
-    //   },
-    //   {
-    //     title: 'Student Edit',
-    //     link: '/pages/forms/buttons',
-    //   },
-    // ],
+    icon: 'people'
   },
   {
     title: 'Classes',
     icon: 'book-open',
     link: '/pages/ui-features',
-    // children: [
-    //   {
-    //     title: 'Class List',
-    //     link: '/pages/ui-features/grid',
-    //   },
-    //   {
-    //     title: 'Class Add',
-    //     link: '/pages/ui-features/icons',
-    //   },
-    //   {
-    //     title: 'Class Edit',
-    //     link: '/pages/ui-features/typography',
-    //   },
-    // ],
   },
+
   {
     title: 'MANAGEMENT',
     group: true,
@@ -78,6 +37,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
     title: 'Time Table',
     icon: 'clock',
   },
+
   {
     title: 'REPORTS',
     group: true,
@@ -98,7 +58,6 @@ export const MENU_ITEMS: NbMenuItem[] = [
   },
   {
     title: 'Marks',
-    icon: 'percent',
-
+    icon: 'percent'
   },
 ];

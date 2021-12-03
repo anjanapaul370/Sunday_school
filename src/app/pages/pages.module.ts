@@ -1,5 +1,10 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+
+import { MatSliderModule } from '@angular/material/slider';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+
 import { NbAuthModule } from '@nebular/auth';
 import {
   NbAlertModule,
@@ -15,6 +20,7 @@ import { PagesRoutingModule } from './pages-routing.module';
 import { PagesComponent } from './pages.component';
 import { TestComponent } from './test/test.component';
 
+
 @NgModule({
   imports: [
     PagesRoutingModule,
@@ -29,6 +35,9 @@ import { TestComponent } from './test/test.component';
     NbCheckboxModule,
     NbCardModule,
     NbMenuModule,
+    MatSliderModule,
+    MatButtonModule,
+    MatIconModule
   ],
   declarations: [PagesComponent, TestComponent],
 })

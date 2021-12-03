@@ -1,6 +1,6 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { NbAuthModule } from '@nebular/auth';
+import { NbAuthModule, NbAuthService } from '@nebular/auth';
 import { NbSecurityModule } from '@nebular/security';
 import {
   NbDatepickerModule,
@@ -11,11 +11,20 @@ import {
   NbToastrModule,
   NbWindowModule,
 } from '@nebular/theme';
+import { environment } from '../environments/environment';
 import { CoreModule } from './@core/core.module';
 import { ThemeModule } from './@theme/theme.module';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { AngularFireModule  } from '@angular/fire/compat';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { AuthService } from './auth/auth.service';
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -33,9 +42,14 @@ import { AppComponent } from './app.component';
     NbWindowModule.forRoot(),
     NbToastrModule.forRoot(),
     NbAuthModule.forRoot(),
-    NbThemeModule.forRoot()
+    NbThemeModule.forRoot(),
+    BrowserAnimationsModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
+    AngularFireAuthModule,
+    AngularFireStorageModule
   ],
-  providers: [],
+  providers: [AuthService, NbAuthService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent],
 })
