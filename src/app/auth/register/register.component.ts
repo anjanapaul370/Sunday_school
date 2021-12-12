@@ -1,24 +1,28 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { NbRegisterComponent } from '@nebular/auth';
+import { Router } from '@angular/router';
+import { NbAuthService, NbRegisterComponent } from '@nebular/auth';
 import { AuthService } from '../auth.service';
-//import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss']
+  styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent extends NbRegisterComponent {
-  private authService: AuthService
-    
+  constructor(
+    public router: Router,
+    public service: NbAuthService,
+    public cd: ChangeDetectorRef,
+    private authService: AuthService
+  ) {
+    super(service, {}, cd, router);
+  }
 
   onSubmit(form: NgForm) {
     this.authService.registerUser({
       email: form.value.email,
-      password: form.value.password
+      password: form.value.password,
     });
-    console.log(form.value.email)
   }
 }
-

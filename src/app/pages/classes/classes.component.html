@@ -1,0 +1,47 @@
+<!-- <button class="xls" style="margin-left: 80%; " mat-raised-button >
+  <span class="material-icons">
+    save_alt
+    </span>
+    <span>XLS</span>
+</button>
+
+<button class="pdf"style="margin-left: 10px;" mat-raised-button>
+  <span class="material-icons">
+    save_alt
+    </span>
+    <span>PDF</span>
+</button> -->
+
+<div fxLayoutAlign="center center">
+    <mat-form-field fxFlex="40%">
+      <input matInput type="text" (keyup)="doFilter(filteredValue.value)" placeholder="Filter" #filteredValue>
+    </mat-form-field>
+<!--add new class-->
+    <button fxFlex="40%" style="margin-left: 70%;" mat-mini-fab color="grey" (click)="openDialog()">
+      <mat-icon>add</mat-icon>
+    </button>
+
+</div>
+
+<mat-table class="mat-elevation-z4" [dataSource]="dataSource" matSort>
+  <ng-container matColumnDef="id">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Id</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{element.id }}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="name">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{element.name }}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="description">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Description</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{element.description }}</mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
+
+<mat-paginator [pageSize]="5" [pageSizeOptions]="[1, 5, 10, 20]">
+</mat-paginator>

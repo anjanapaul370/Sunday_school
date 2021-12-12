@@ -16,6 +16,7 @@
     "@angular/compiler": "~12.2.0",
     "@angular/core": "~12.2.0",
     "@angular/fire": "^7.2.0",
+    "@angular/flex-layout": "^13.0.0-beta.36",
     "@angular/forms": "~12.2.0",
     "@angular/material": "^12.2.13",
     "@angular/platform-browser": "~12.2.0",
@@ -35,6 +36,7 @@
     "material-icons": "^1.10.3",
     "rxjs": "~6.6.0",
     "tslib": "^2.3.0",
+    "xlsx": "^0.17.4",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {

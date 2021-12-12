@@ -8,7 +8,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Dashboard',
     icon: 'home',
-    link: '/pages/iot-dashboard',
+    link: '/pages/test',
     home: true,
   },
   {
@@ -22,7 +22,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Classes',
     icon: 'book-open',
-    link: '/pages/ui-features',
+    link: '/pages/classes',
   },
 
   {
@@ -59,5 +59,18 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Marks',
     icon: 'percent'
+  },
+  {
+    title: 'USER',
+    group: true,
+  },
+  {
+    title: 'Profile',
+    icon: 'smiling-face',
+  },
+  {
+    title: 'Logout',
+    icon: 'log-out',
+    link: '/auth'
   },
 ];

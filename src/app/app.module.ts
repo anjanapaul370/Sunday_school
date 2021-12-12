@@ -24,6 +24,7 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { AuthService } from './auth/auth.service';
+import { ClassesService } from './pages/classes/classes.service';
 
 
 @NgModule({
@@ -49,7 +50,7 @@ import { AuthService } from './auth/auth.service';
     AngularFireAuthModule,
     AngularFireStorageModule
   ],
-  providers: [AuthService, NbAuthService],
+  providers: [AuthService, NbAuthService, ClassesService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent],
 })

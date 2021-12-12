@@ -1,12 +1,10 @@
-import { Injectable } from "@angular/core";
-import { AngularFireAuth } from "@angular/fire/compat/auth";
-import { AngularFirestore } from "@angular/fire/compat/firestore";
+import { Injectable } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
-import { Router } from "@angular/router";
-import { AuthData } from "./auth-data.model";
-import { User } from "./user.model";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { Subject } from "rxjs";
+import { Router } from '@angular/router';
+import { AuthData } from './auth-data.model';
+import { Subject } from 'rxjs';
 
 @Injectable()
 export class AuthService {
@@ -16,48 +14,54 @@ export class AuthService {
     private afAuth: AngularFireAuth,
     private angularFirestore: AngularFirestore,
     private router: Router
-  ) {}
+   )
+   {
+     this.afAuth.authState.subscribe((user) => {
+       console.log(user.email);
+       router.navigate(['/pages']);                    //to check which user is logged in
+     });
+  }
 
-    registerUser(authData: AuthData) {
-      this.afAuth.createUserWithEmailAndPassword(
-        authData.email,
-        authData.password
-        ).then(result => {
-          console.log(result);
-          this.authSuccessfully();
-        })
-        .catch(error => {
-          console.log(error);
-        });
-    }
+  registerUser(authData: AuthData) {
+    this.afAuth
+      .createUserWithEmailAndPassword(authData.email, authData.password)
+      .then((result) => {
+        console.log(result);
+        this.authSuccessfully();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
 
-    login(authData: AuthData) {
-      this.afAuth.signInWithEmailAndPassword(
-        authData.email,
-        authData.password
-        ).then(result => {
-          console.log(result);
-          this.authSuccessfully();
-        })
-        .catch(error => {
-          console.log(error);
-        });
-    }
+  login(authData: AuthData) {
+    this.afAuth
+      .signInWithEmailAndPassword(authData.email, authData.password)
+      .then((result) => {
+        //console.log(result);
+        this.authSuccessfully();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
 
-
-  logout(){
+  logout() {
+    this.afAuth.signOut();
     this.authChange.next(false);
     this.router.navigate(['/auth']);
     this.isAuthenticated = false;
+
   }
 
-  isAuth(){
+  isAuth() {
     return this.isAuthenticated;
   }
 
-  private authSuccessfully(){
+  private authSuccessfully() {
     this.isAuthenticated = true;
     this.authChange.next(true);
     this.router.navigate(['/pages']);
   }
 }
+

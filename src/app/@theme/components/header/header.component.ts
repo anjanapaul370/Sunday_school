@@ -5,8 +5,10 @@ import {
   NbSidebarService,
   NbThemeService,
 } from '@nebular/theme';
+import { title } from 'process';
 import { Subject } from 'rxjs';
 import { map, takeUntil } from 'rxjs/operators';
+import { AuthService } from '../../../auth/auth.service';
 
 @Component({
   selector: 'ngx-header',
@@ -20,13 +22,15 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   currentTheme = 'default';
 
-  userMenu = [{ title: 'Profile' }, { title: 'Log out' }];
+  userMenu = [{ title: 'Profile' }, { title: 'Log out' , path:'/auth'}];
+
 
   constructor(
     private sidebarService: NbSidebarService,
     private menuService: NbMenuService,
     private themeService: NbThemeService,
-    private breakpointService: NbMediaBreakpointsService
+    private breakpointService: NbMediaBreakpointsService,
+    private authService: AuthService
   ) {}
 
   ngOnInit() {
@@ -69,5 +73,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
   navigateHome() {
     this.menuService.navigateHome();
     return false;
+  }
+
+  logout(){
+    this.authService.logout();
   }
 }
