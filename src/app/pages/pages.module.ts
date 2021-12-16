@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatButtonModule } from '@angular/material/button';
@@ -24,7 +24,9 @@ import { ClassesComponent, PopupComponent } from './classes/classes.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
-
+import {MatSnackBarModule } from '@angular/material/snack-bar'
+import { MatMenuModule } from '@angular/material/menu';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 @NgModule({
   imports: [
@@ -48,8 +50,14 @@ import { MatSelectModule } from '@angular/material/select';
     MatFormFieldModule,
     MatInputModule,
     MatDialogModule,
-    MatSelectModule
+    MatSelectModule,
+    MatSnackBarModule,
+    MatMenuModule,
+    MatTooltipModule,
+    ReactiveFormsModule
   ],
   declarations: [PagesComponent, TestComponent, ClassesComponent, PopupComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
+
 export class PagesModule {}

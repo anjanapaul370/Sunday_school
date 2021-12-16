@@ -1,41 +1,29 @@
 <div align="center">
-<!-- <form > -->
-<div mat-dialog-content>
-  <mat-form-field appearance="fill">
-    <mat-label>Id</mat-label>
-    <input matInput [(ngModel)]="data.id" />
-  </mat-form-field>
+  <form [formGroup]="classForm" (ngSubmit)="onSubmit()">
+    <div mat-dialog-title>Class</div>
+    <div mat-dialog-content>
+      <mat-form-field appearance="fill">
+        <mat-label>Class Name </mat-label>
+        <mat-select matInput formControlName="name">
+          <mat-option *ngFor="let class of classes" [value]="class">
+            {{ class }}
+          </mat-option>
+        </mat-select>
+        <mat-error>Field must not be empty.</mat-error>
+      </mat-form-field>
+    </div>
+    <div mat-dialog-content>
+      <mat-form-field appearance="fill">
+        <mat-label>Class Description</mat-label>
+        <input matInput formControlName="description" />
+      </mat-form-field>
+    </div>
+    <div mat-dialog-actions align="center">
+      <!-- <button *ngIf="f.valid" [mat-dialog-close]="data" mat-raised-button >Ok</button> -->
+      <button type="submit" mat-raised-button>Ok</button>
+      <button type="button" mat-raised-button (click)="onNoClick()">
+        Cancel
+      </button>
+    </div>
+  </form>
 </div>
-<div mat-dialog-content>
-  <mat-form-field appearance="fill">
-    <mat-label>Class Name </mat-label>
-    <mat-select [(value)]="selected" matInput [(ngModel)]="data.name" [required]="true">
-      <mat-option value ="I">I</mat-option>
-      <mat-option value ="II">II</mat-option>
-      <mat-option value ="III">III</mat-option>
-      <mat-option value ="IV">IV</mat-option>
-      <mat-option value ="V">V</mat-option>
-      <mat-option value ="VI">VI</mat-option>
-      <mat-option value ="VII">VII</mat-option>
-      <mat-option value ="VIII">VIII</mat-option>
-      <mat-option value ="IX">IX</mat-option>
-      <mat-option value ="X">X</mat-option>
-      <mat-option value ="XI">XI</mat-option>
-      <mat-option value ="XII">XII</mat-option>
-    </mat-select>
-   <mat-error>Field must not be empty.</mat-error>
-  </mat-form-field>
-</div>
-<div mat-dialog-content>
-  <mat-form-field appearance="fill">
-    <mat-label>Class Description</mat-label>
-    <input matInput [(ngModel)]="data.description" />
-  </mat-form-field>
-</div>
-<div mat-dialog-actions align="center">
-  <button mat-button [mat-dialog-close]="data" [disabled]="click">Ok</button>
-  <button mat-button (click)="onNoClick()">Cancel</button>
-</div>
-<!-- </form> -->
-</div>
-

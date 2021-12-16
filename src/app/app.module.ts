@@ -25,6 +25,7 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { AuthService } from './auth/auth.service';
 import { ClassesService } from './pages/classes/classes.service';
+import { PagesModule } from './pages/pages.module';
 
 
 @NgModule({
@@ -48,7 +49,8 @@ import { ClassesService } from './pages/classes/classes.service';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireAuthModule,
-    AngularFireStorageModule
+    AngularFireStorageModule,
+    PagesModule
   ],
   providers: [AuthService, NbAuthService, ClassesService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
