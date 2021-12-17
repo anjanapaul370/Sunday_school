@@ -16,7 +16,7 @@ import {
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
-import { ClassData } from '../classes.model';
+import { ClassData, ClassDialogData } from './classes.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'app-classes',
@@ -58,16 +58,22 @@ export class ClassesComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   openDialog(): void {
+    const data: ClassDialogData = { classes: this.dataSource.data };
     const dialogRef = this.dialog.open(PopupComponent, {
       width: '300px',
       hasBackdrop: true,
+      data: data,
     });
   }
 
   editDialog(_class: ClassData) {
+    const data: ClassDialogData = {
+      classes: this.dataSource.data,
+      _class: _class,
+    };
     const dialogRef = this.dialog.open(PopupComponent, {
       width: '300px',
-      data: _class,
+      data: data,
     });
   }
 
@@ -84,16 +90,17 @@ export class ClassesComponent implements OnInit, AfterViewInit, OnDestroy {
       .catch((err) => console.log(err));
   }
 
-  deleteAlert(_class: ClassData){
-    if(confirm("Are you sure to delete?")){
+  deleteAlert(_class: ClassData) {
+    if (confirm('Are you sure to delete?')) {
       this.deleteClasses(_class);
     }
   }
 
-  viewClass(_class:ClassData){
+  viewClass(_class: ClassData) {
+    const data: ClassDialogData = { _class: _class };
     const dialogRef = this.dialog.open(PopupComponent, {
       width: '300px',
-      data: _class,
+      data: data,
     });
   }
 
@@ -124,21 +131,30 @@ export class PopupComponent implements OnInit {
     'XII',
   ];
 
-  data: ClassData;
+  _class: ClassData;
 
   classForm: FormGroup;
 
   constructor(
     public dialogRef: MatDialogRef<PopupComponent>,
-    @Inject(MAT_DIALOG_DATA) public _class: ClassData,
+    @Inject(MAT_DIALOG_DATA) public data: ClassDialogData,
     private _fb: FormBuilder,
     private classesService: ClassesService
   ) {}
 
   ngOnInit(): void {
+    console.log(this.data._class);
+
     this.initForm();
-    this.data = Object.assign({}, this._class);
-    if (this._class) this.patchFormValues();
+    this._class = Object.assign({}, this._class);
+    if (this.data._class) this.patchFormValues();
+    for (let i = 0; i < this.data.classes.length; i++) {
+      this.classes = this.classes.filter((_class) => {
+        if (this.data._class && _class == this.data._class.name)
+          return _class == this.data._class.name;
+        return _class != this.data.classes[i].name;
+      });
+    }
   }
 
   initForm() {
@@ -150,8 +166,8 @@ export class PopupComponent implements OnInit {
 
   patchFormValues() {
     this.classForm.patchValue({
-      name: this._class.name,
-      description: this._class.description,
+      name: this.data._class.name,
+      description: this.data._class.description,
     });
   }
 
@@ -162,7 +178,7 @@ export class PopupComponent implements OnInit {
   onSubmit() {
     let data = Object.assign({}, this.classForm.value);
     if (this.classForm.valid) {
-      if (!this._class) {
+      if (!this.data._class) {
         this.classesService.addClassToDatabase(data).then(() => {
           this.classesService.showSnackbar(
             'Successfully added new class',
@@ -172,8 +188,8 @@ export class PopupComponent implements OnInit {
           this.dialogRef.close();
         });
       } else {
-        this.classesService.updateClass(this._class.id, data).then(() => {
-          this.classesService.showSnackbar('updated the class', null, 3000);
+        this.classesService.updateClass(this.data._class.id, data).then(() => {
+          // this.classesService.showSnackbar('updated the class', null, 3000);
         });
         this.dialogRef.close();
       }

@@ -2,26 +2,38 @@
   <form [formGroup]="classForm" (ngSubmit)="onSubmit()">
     <div mat-dialog-title>Class</div>
     <div mat-dialog-content>
-      <mat-form-field appearance="fill">
-        <mat-label>Class Name </mat-label>
-        <mat-select matInput formControlName="name">
-          <mat-option *ngFor="let class of classes" [value]="class">
-            {{ class }}
-          </mat-option>
-        </mat-select>
-        <mat-error>Field must not be empty.</mat-error>
-      </mat-form-field>
+      <ng-container *ngIf="data.classes;
+      else elseTemplate"><!-- for edit & add -->
+        <mat-form-field appearance="fill">
+          <mat-label>Class Name </mat-label>
+          <mat-select matInput formControlName="name">
+            <mat-option *ngFor="let class of classes" [value]="class">
+              {{ class }}
+            </mat-option>
+          </mat-select>
+          <mat-error>Field must not be empty.</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Class Description</mat-label>
+          <input matInput formControlName="description" />
+        </mat-form-field>
+      </ng-container>
+      <!-- for view -->
+      <ng-template #elseTemplate>
+        <div>Class Name: {{ data._class.name }}</div>
+        <div>Description: {{ data._class.description }}</div>
+      </ng-template>
     </div>
-    <div mat-dialog-content>
-      <mat-form-field appearance="fill">
-        <mat-label>Class Description</mat-label>
-        <input matInput formControlName="description" />
-      </mat-form-field>
-    </div>
+
     <div mat-dialog-actions align="center">
       <!-- <button *ngIf="f.valid" [mat-dialog-close]="data" mat-raised-button >Ok</button> -->
       <button type="submit" mat-raised-button>Ok</button>
-      <button type="button" mat-raised-button (click)="onNoClick()">
+      <button
+        *ngIf="data.classes"
+        type="button"
+        mat-raised-button
+        (click)="onNoClick()"
+      >
         Cancel
       </button>
     </div>

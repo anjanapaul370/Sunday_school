@@ -9,25 +9,24 @@ import {
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
 import { Observable, Subject } from 'rxjs';
-import { ClassData } from '../classes.model';
+import { ClassData } from './classes.model';
 import * as firebase from 'firebase/firestore';
 import { map } from 'rxjs/operators';
-import { query, where } from "firebase/firestore";
-
 @Injectable({
   providedIn: 'root',
 })
 export class ClassesService {
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
-  is_Deleted: Boolean = false;
-  //classesRef: AngularFirestoreCollection<ClassData>;
 
   constructor(private db: AngularFirestore, public snackbar: MatSnackBar) {}
 
   fetchClasses(): Observable<ClassData[]> {
     return this.db
-      .collection('classes', (ref) => ref.where('is_deleted', '==', false))
+      .collection('classes', (ref) =>
+        ref.where('is_deleted', '==', false)
+         .orderBy('created', 'desc')
+      )
       .snapshotChanges()
       .pipe(
         map((arr) => {
@@ -44,7 +43,12 @@ export class ClassesService {
   addClassToDatabase(classes: ClassData) {
     return this.db
       .collection('classes')
-      .add({ ...classes, created: this.timestamp, updated: null, is_deleted: false });
+      .add({
+        ...classes,
+        created: this.timestamp,
+        updated: null,
+        is_deleted: false,
+      });
   }
 
   updateClass(id: string, data: any) {
@@ -55,11 +59,7 @@ export class ClassesService {
   }
 
   deleteClass(id: string) {
-    return this.db.collection("classes").doc(id).update({is_deleted: true});
-  }
-
-  isDelete(){
-    this.is_Deleted = true;
+    return this.db.collection('classes').doc(id).update({ is_deleted: true });
   }
 
   showSnackbar(message, action, duration) {

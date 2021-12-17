@@ -5,6 +5,11 @@ export interface ClassData {
   created_by: string;
   created_date: string;
   updated_by: string;
-  updated_date:string;
+  updated_date: string;
   is_deleted: boolean;
+}
+
+export interface ClassDialogData {
+  classes?: ClassData[];
+  _class?: ClassData;
 }

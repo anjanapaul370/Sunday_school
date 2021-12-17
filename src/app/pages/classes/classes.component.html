@@ -35,12 +35,7 @@
   </button>
 </div>
 
-<mat-table
-  class="mat-elevation-z4"
-  [dataSource]="dataSource"
-  matSort
-  align="center"
->
+<mat-table [dataSource]="dataSource" matSort align="center">
   <ng-container matColumnDef="name">
     <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
     <mat-cell *matCellDef="let element">{{ element.name }}</mat-cell>
@@ -53,8 +48,8 @@
     <mat-cell *matCellDef="let element">{{ element.description }}</mat-cell>
   </ng-container>
 
-  <ng-container matColumnDef="actions">
-    <mat-header-cell *matHeaderCellDef mat-sort-header></mat-header-cell>
+  <ng-container class="space" matColumnDef="actions">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Options</mat-header-cell>
     <mat-cell *matCellDef="let class">
       <button
         mat-icon-button
